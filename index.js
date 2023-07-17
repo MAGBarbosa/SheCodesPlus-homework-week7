@@ -1,51 +1,3 @@
-let now = new Date();
-console.log(now);
-
-let date = now.getDate();
-console.log(date);
-
-let milliseconds = now.getMilliseconds();
-console.log(milliseconds);
-
-let day = now.getDay();
-console.log(day);
-
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let weekDay = days[now.getDay()];
-
-let year = now.getFullYear();
-console.log(year);
-
-let month = now.getMonth();
-console.log(month);
-
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-let monthName = months[now.getMonth()];
-let h2 = document.querySelector("h2");
-h2.innerHTML = `${weekDay}, ${monthName} ${date}, ${year}`;
-
 //JS to toggle currentLocation button ON and OFF
 
 function toggleButton() {
@@ -60,38 +12,7 @@ let btn = document.querySelector("#currentLocationButton");
 
 btn.addEventListener("click", toggleButton);
 
-//JS to toggle weatherDetails ON and OFF
-
-function toggleDetails() {
-  let tempBtn = document.querySelector(".temperatureDetails");
-  tempBtn.style.textDecoration = "underline";
-  precipBtn.style.textDecoration = "none";
-  windBtn.style.textDecoration = "none";
-}
-let tempBtn = document.querySelector(".temperatureDetails");
-
-tempBtn.addEventListener("click", toggleDetails);
-
-function toggleDetails2() {
-  let precipBtn = document.querySelector(".precipitationDetails");
-  tempBtn.style.textDecoration = "none";
-  precipBtn.style.textDecoration = "underline";
-  windBtn.style.textDecoration = "none";
-}
-let precipBtn = document.querySelector(".precipitationDetails");
-
-precipBtn.addEventListener("click", toggleDetails2);
-
-function toggleDetails3() {
-  tempBtn.style.textDecoration = "none";
-  precipBtn.style.textDecoration = "none";
-  windBtn.style.textDecoration = "underline";
-}
-let windBtn = document.querySelector(".windDetails");
-
-windBtn.addEventListener("click", toggleDetails3);
-
-// JS to edit search field placeholder (não tá a funcionar como quero)
+// JS to edit search field placeholder
 
 let form = document.querySelector("#search-bar");
 
@@ -105,11 +26,22 @@ form.addEventListener("submit", function (event) {
 //Give real weather for Porto as default
 let portoTemperature = document.querySelector("#temperature");
 
+let windData = document.querySelector(".wind-speed-value");
+
+let weatherDescription = document.querySelector(".description");
+
+let weatherIcon = document.querySelector(".weather-icon");
+
 function showPortoTemperature(response) {
   celsiusLink.style.fontWeight = "bold";
-
+  weatherDescription.innerHTML = `${response.data.weather[0].description}`;
+  windData.innerHTML = Math.round(response.data.wind.speed);
   portoTemperature.innerHTML = Math.round(response.data.main.temp);
-  console.log("else");
+  let icon = response.data.weather[0].icon;
+  weatherIcon.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${icon}@2x.png`
+  );
 }
 
 let apiKey = "e0a5a97de9a0b7a951e9d154a8f9bad8";
@@ -120,14 +52,20 @@ axios.get(apiUrlPorto).then(showPortoTemperature);
 
 function showCityTemperature(response) {
   let todayTempElement = document.querySelector("#temperature");
-  let roundedTemperature = Math.round(response.data.main.temp);
-  todayTempElement.innerHTML = `${roundedTemperature}`;
-  console.log(response);
   if (fahrenheitLink.style.textDecoration === "underline") {
     todayTempElement.innerHTML = `${Math.round(
       (roundedTemperature * 9) / 5 + 32
     )}`;
   }
+  weatherDescription.innerHTML = `${response.data.weather[0].description}`;
+  windData.innerHTML = Math.round(response.data.wind.speed);
+  let roundedTemperature = Math.round(response.data.main.temp);
+  todayTempElement.innerHTML = `${roundedTemperature}`;
+  let icon = response.data.weather[0].icon;
+  weatherIcon.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${icon}@2x.png`
+  );
 }
 
 function searchCity(context) {
@@ -163,6 +101,15 @@ function showTemperature(position) {
   let h1 = document.querySelector("h1");
   let city = position.data.name;
   h1.innerHTML = `${city}`;
+
+  weatherDescription.innerHTML = `${position.data.weather[0].description}`;
+  windData.innerHTML = Math.round(position.data.wind.speed);
+
+  let icon = position.data.weather[0].icon;
+  weatherIcon.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${icon}@2x.png`
+  );
 }
 
 function showPosition(position) {
