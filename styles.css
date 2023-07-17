@@ -1,0 +1,163 @@
+html {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container {
+  border: 1px solid rgb(43, 66, 71);
+  border-radius: 15px;
+  padding: 10px 8px 0px 8px;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.6);
+  margin-top: 6%;
+  box-shadow: 5px 5px 5px 5px rgb(70, 101, 109, 0.6);
+}
+.flexInput {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+.currentLocation {
+  margin-left: 10px;
+}
+#currentLocationButton {
+  background-color: rgba(70, 101, 109, 0.6);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.activeButton #currentLocationButton {
+  background-color: rgb(234, 240, 239);
+  color: rgb(108, 111, 113);
+  cursor: pointer;
+}
+p {
+  margin-top: 10px;
+}
+
+.container p,
+h1,
+h2,
+.today-temperature,
+#celsius,
+#fahrenheit,
+#separator {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 800;
+  color: black;
+  text-decoration: none;
+  line-height: 1.5;
+}
+h1,
+h2 {
+  padding-left: 30px;
+}
+.today-temperature,
+#celsius,
+#fahrenheit {
+  font-size: 28px;
+}
+.today-info {
+  padding-left: 100px;
+}
+.flex-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+.column-one {
+  order: 1;
+  padding-left: 30px;
+}
+.column-two {
+  order: 2;
+  margin: 15px 15px 20px 15px;
+}
+.temperatureDetails,
+.precipitationDetails,
+.windDetails {
+  display: inline;
+  margin-left: 25px;
+}
+
+.row {
+  padding: 10px 5px 0px 5px;
+}
+.other-days {
+  font-size: 16px;
+  text-align: center;
+  line-height: 1.5;
+  margin: 8px;
+}
+
+.players {
+  margin: 0 auto;
+}
+.col {
+  border: 1px solid rgb(70, 101, 109);
+  border-radius: 10px;
+  margin: 0px 2px;
+  background: rgba(86, 118, 126, 0.4);
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  transition: background-color 300ms ease-in-out;
+}
+.col:hover {
+  background-color: rgb(70, 101, 109, 0.6);
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  z-index: -1;
+}
+#search-bar {
+  max-width: 600px;
+}
+#button-addon2 {
+  background: rgb(234, 240, 239);
+  cursor: pointer;
+}
+#button-addon2:hover {
+  background: rgba(70, 101, 109, 0.6);
+}
+input[type="text"]:focus {
+  border-color: rgba(46, 130, 151, 0.8);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.075) inset,
+    0 0 8px rgba(46, 130, 151, 0.8);
+  outline: 0 none;
+}
+.footer {
+  font-family: "EB Garamond", serif;
+  font-size: 14px;
+}
+.project-links {
+  margin-bottom: 2px;
+}
+
+@media screen and (max-width: 800px) {
+  #myVideo {
+    position: fixed;
+    right: 0;
+    top: 0;
+    max-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  .col {
+    min-width: 20%;
+    margin-bottom: 5px;
+  }
+  .column-one,
+  h1,
+  h2 {
+    padding-left: 5px;
+  }
+  #currentLocationButton {
+    min-width: 140px;
+  }
+}
